@@ -13,6 +13,8 @@ class Test extends FunSuite with ShouldMatchers {
   test("empty queue"){
 	val q = new Queue 
 	q.size should be(0)
+	
+	//q.dequeue should be 
   }
   
   
@@ -21,6 +23,10 @@ class Test extends FunSuite with ShouldMatchers {
     val q: Queue = new Queue
     val q2 = q.enqueue(zdenek)
     q2.size should be (1)
+    
+    val (q3, pr) = q2.dequeue 
+    q3.size should be(0)
+    pr should be(zdenek) 
   }
 
 }

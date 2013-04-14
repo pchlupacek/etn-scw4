@@ -20,10 +20,15 @@ case class Item(pr: Programmer, next: Option[Item])
 class Queue private (start: Option[Item], end: Option[Item]) {
   
   def this() = this(None, None)
+  
   def size: Int = if (start.isDefined) 1 else 0
+  
   def enqueue(pr: Programmer) : Queue = {
     val newItem = Item(pr, None)
     new Queue(Some(newItem), Some(newItem))
   }
   
+  def dequeue : (Queue, Programmer) = {
+    (new Queue, start.get.pr)
+  }
 }
