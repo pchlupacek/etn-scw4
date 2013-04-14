@@ -15,13 +15,22 @@ import SkillLevel._
 
 case class Programmer(name: String, age: Int, languages: Map[Language, SkillLevel])
 
-case class Item(pr: Programmer, next: Option[Item])
+case class Item(pr: Programmer, next: Option[Item]) {
+  
+  def length: Int = 1 + (if (next.isDefined) next.get.length else 0)
+  
+}
 
 class Queue private (start: Option[Item], end: Option[Item]) {
   
   def this() = this(None, None)
   
-  def size: Int = if (start.isDefined) 1 else 0
+  def size: Int = {
+    if (start.isDefined) 1 else 0
+      
+    //else 0
+    //1
+  }
   
   def enqueue(pr: Programmer) : Queue = {
     val newItem = Item(pr, None)
