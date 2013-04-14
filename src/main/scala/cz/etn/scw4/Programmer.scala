@@ -14,3 +14,10 @@ import Language._
 import SkillLevel._
 
 case class Programmer(name: String, age: Int, languages: Map[Language, SkillLevel])
+
+class Queue {
+  
+  def size: Int = 0
+//  def enqueue() : Queue 
+  
+}
