@@ -10,6 +10,7 @@ class Test extends FunSuite with ShouldMatchers {
 
   val zdenek = new Programmer("Zdenek", 20, Map(Java -> Noob, Scala -> Noob))
   val pajoslaff = new Programmer("Pajoslaff", 21, Map(Java -> Noob, Scala -> Noob))
+  val karel = new Person("Karel", 29)
 
   test("one element list") {
     Item(zdenek, None).length should be(1)
@@ -48,7 +49,13 @@ class Test extends FunSuite with ShouldMatchers {
   }
   
   test("extract the list of person names") {
-    val q = new Queue[Person]().enqueue(zdenek).enqueue(pajoslaff)
-    NameExtractor.extractNames(q) should be (List("Zdenek", "Pajoslaff")) 
+    val q = new Queue[Person]().enqueue(zdenek).enqueue(pajoslaff).enqueue(karel)
+    NameExtractor.extractNames(q) should be (List("Zdenek", "Pajoslaff", "Karel")) 
+  }
+  
+  test("extract the list of programmer names") {
+	val q: Queue[Programmer] = new Queue[Programmer]().enqueue(zdenek).enqueue(pajoslaff)
+	val q2 = q.enqueue(karel)
+	NameExtractor.extractNames(q) should be (List("Zdenek", "Pajoslaff")) 
   }
 }

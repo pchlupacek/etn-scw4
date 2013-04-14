@@ -20,19 +20,19 @@ case class Programmer(override val name: String,
     languages: Map[Language, SkillLevel])
   extends Person(name, age)
 
-case class Item[A](pr: A, next: Option[Item[A]]) {
+case class Item[+A](pr: A, next: Option[Item[A]]) {
   def length: Int = 1 + (if (next.isDefined) next.get.length else 0)
 }
 
-class Queue[A] private (start: Option[Item[A]], end: Option[Item[A]]) {
+class Queue[+A] private (start: Option[Item[A]], end: Option[Item[A]]) {
 
   def this() = this(None, None)
 
   def size: Int = if (start.isDefined) start.get.length else 0
 
-  def enqueue(pr: A): Queue[A] = {
+  def enqueue[B >: A](pr: B): Queue[B] = {
     val newEndItem = Some(Item(pr, None))
-    def copy(i: Option[Item[A]]): Option[Item[A]] = i match {
+    def copy(i: Option[Item[B]]): Option[Item[B]] = i match {
       case None => newEndItem
       case Some(Item(pr, next)) => Some(Item(pr, copy(next)))
     }
