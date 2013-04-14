@@ -58,4 +58,10 @@ class Test extends FunSuite with ShouldMatchers {
 	val q2 = q.enqueue(karel)
 	NameExtractor.extractNames(q) should be (List("Zdenek", "Pajoslaff")) 
   }
+  
+  test("queue of interviewers") {
+	val q = new Queue().enqueue(DicriminatingInterviewer).enqueue(ScalaInterviewer)
+	val (q1, i) = q.dequeue
+  }
+ 
 }

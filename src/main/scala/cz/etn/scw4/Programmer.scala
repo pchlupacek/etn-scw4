@@ -20,6 +20,18 @@ case class Programmer(override val name: String,
     languages: Map[Language, SkillLevel])
   extends Person(name, age)
 
+trait Interviewer[-A] {
+  def interview(p: A): Boolean
+}
+
+object DicriminatingInterviewer extends Interviewer[Person] {
+  override def interview(p: Person): Boolean = p.age <= 25
+}
+
+object ScalaInterviewer extends Interviewer[Programmer] {
+  def interview(p: Programmer): Boolean = p.languages.get(Scala).exists(_ == Guru)
+}
+
 case class Item[+A](pr: A, next: Option[Item[A]]) {
   def length: Int = 1 + (if (next.isDefined) next.get.length else 0)
 }
