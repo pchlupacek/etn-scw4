@@ -11,6 +11,7 @@ class Test extends FunSuite with ShouldMatchers {
   val zdenek = new Programmer("Zdenek", 20, Map(Java -> Noob, Scala -> Noob))
   val pajoslaff = new Programmer("Pajoslaff", 21, Map(Java -> Noob, Scala -> Noob))
   val karel = new Person("Karel", 29)
+  val lada = new Programmer("Lada", 25, Map(Php -> Expert, Java -> Intermediate))
 
   test("one element list") {
     Item(zdenek, None).length should be(1)
@@ -63,5 +64,7 @@ class Test extends FunSuite with ShouldMatchers {
 	val q = new Queue().enqueue(DicriminatingInterviewer).enqueue(ScalaInterviewer)
 	val (q1, i) = q.dequeue
   }
+  
+  
  
 }

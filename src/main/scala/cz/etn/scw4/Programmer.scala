@@ -36,6 +36,7 @@ case class Item[+A](pr: A, next: Option[Item[A]]) {
   def length: Int = 1 + (if (next.isDefined) next.get.length else 0)
 }
 
+
 class Queue[+A] private (start: Option[Item[A]], end: Option[Item[A]]) {
 
   def this() = this(None, None)
