@@ -20,14 +20,14 @@ class Test extends FunSuite with ShouldMatchers {
   }
 
   test("empty queue") {
-    val q = new Queue
+    val q = new Queue[Person]
     q.size should be(0)
 
     evaluating { q.dequeue } should produce[NoSuchElementException]
   }
 
   test("one element queue") {
-    val q: Queue = new Queue
+    val q: Queue[Programmer] = new Queue[Programmer]
     val q2 = q.enqueue(zdenek)
     q2.size should be(1)
 
@@ -46,5 +46,9 @@ class Test extends FunSuite with ShouldMatchers {
     pr2 should be (pajoslaff)
     q2.size should be (0)
   }
-
+  
+  test("extract the list of person names") {
+    val q = new Queue[Person]().enqueue(zdenek).enqueue(pajoslaff)
+    NameExtractor.extractNames(q) should be (List("Zdenek", "Pajoslaff")) 
+  }
 }
