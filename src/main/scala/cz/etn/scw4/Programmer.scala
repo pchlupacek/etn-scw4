@@ -21,15 +21,19 @@ case class Item(pr: Programmer, next: Option[Item]) {
 
 }
 
-class Queue(start: Option[Item], end: Option[Item]) {
+class Queue private (start: Option[Item], end: Option[Item]) {
 
   def this() = this(None, None)
 
   def size: Int = if (start.isDefined) start.get.length else 0
 
   def enqueue(pr: Programmer): Queue = {
-    val newItem = Item(pr, None)
-    new Queue(Some(newItem), Some(newItem))
+    val newEndItem = Some(Item(pr, None))
+    def copy(i: Option[Item]): Option[Item] = i match {
+      case None => newEndItem        
+      case Some(Item(pr, next)) => Some(Item(pr, copy(next)))
+    }    
+    new Queue(copy(start), newEndItem)
   }
 
   def dequeue: (Queue, Programmer) = (new Queue(start.get.next, end), start.get.pr)

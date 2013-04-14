@@ -37,11 +37,7 @@ class Test extends FunSuite with ShouldMatchers {
   }
 
   test("two elements queue") {
-
-    //    val q = new Queue().enqueue(zdenek).enqueue(pajoslaff)
-    val paj = Item(pajoslaff, None)
-    val linkedList = Item(zdenek, Some(paj))
-    val q = new Queue(Some(linkedList), Some(paj))
+    val q = new Queue().enqueue(zdenek).enqueue(pajoslaff)
     q.size should be(2)
 
     val (q1, pr1) = q.dequeue
