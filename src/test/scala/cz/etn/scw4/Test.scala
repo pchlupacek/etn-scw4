@@ -15,10 +15,12 @@ class Test extends FunSuite with ShouldMatchers {
 	q.size should be(0)
   }
   
-//  test("queue enq spec"){
-//    val q: Queue = new Queue
-//    val q2 = q.enqueue(zdenek)
-    
-//  }
+  
+  
+  test("queue enq spec"){
+    val q: Queue = new Queue
+    val q2 = q.enqueue(zdenek)
+    q2.size should be (1)
+  }
 
 }
